@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1516</width>
+    <height>1000</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Chinook - Customer Clustering (K-Means)</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLineEdit" name="lineEditTitle">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1491</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(0, 0, 127);</string>
+    </property>
+    <property name="text">
+     <string>CHINOOK MUSIC STORE - GOM CỤM KHÁCH HÀNG THEO MỨC ĐỘ QUAN TÂM TRACK &amp; ALBUM</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBoxModel">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>30</y>
+      <width>1491</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>1. Dữ liệu và mô hình</string>
+    </property>
+    <widget class="QLabel" name="labelDatabase">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>61</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Database:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditDatabase">
+     <property name="geometry">
+      <rect>
+       <x>72</x>
+       <y>20</y>
+       <width>175</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Dataset/Chinook_Sqlite.sqlite</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonLoadData">
+     <property name="geometry">
+      <rect>
+       <x>252</x>
+       <y>20</y>
+       <width>80</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Load Data</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelModel">
+     <property name="geometry">
+      <rect>
+       <x>345</x>
+       <y>20</y>
+       <width>55</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Mô hình:</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBoxModel">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>20</y>
+       <width>285</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>Quan tâm TRACK (GenreCount, AvgMinutes)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Quan tâm ALBUM (AlbumCount, AlbumPopularity)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>TRACK + ALBUM (3 thuộc tính)</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLabel" name="labelK">
+     <property name="geometry">
+      <rect>
+       <x>695</x>
+       <y>20</y>
+       <width>61</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Số cụm K:</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="spinBoxK">
+     <property name="geometry">
+      <rect>
+       <x>755</x>
+       <y>20</y>
+       <width>81</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="minimum">
+      <number>2</number>
+     </property>
+     <property name="maximum">
+      <number>10</number>
+     </property>
+     <property name="value">
+      <number>3</number>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonElbow">
+     <property name="geometry">
+      <rect>
+       <x>840</x>
+       <y>20</y>
+       <width>70</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Elbow</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonTrain">
+     <property name="geometry">
+      <rect>
+       <x>910</x>
+       <y>20</y>
+       <width>90</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Train Model</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonSaveModel">
+     <property name="geometry">
+      <rect>
+       <x>1000</x>
+       <y>20</y>
+       <width>90</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Save Model</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonLoadModel">
+     <property name="geometry">
+      <rect>
+       <x>1090</x>
+       <y>20</y>
+       <width>90</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Load Model</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelStatus">
+     <property name="geometry">
+      <rect>
+       <x>1194</x>
+       <y>20</y>
+       <width>291</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBoxCustomer">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>80</y>
+      <width>711</width>
+      <height>491</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>2. Danh sách Customer và cụm</string>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QTableWidget" name="tableWidgetCustomer"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QGroupBox" name="groupBoxPlot">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>80</y>
+      <width>771</width>
+      <height>491</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>3. Trực quan hóa cụm</string>
+    </property>
+    <widget class="QWidget" name="verticalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>751</width>
+       <height>461</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayoutPlot"/>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBoxSearch">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>570</y>
+      <width>761</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>4. Tra cứu Customer và gợi ý Album</string>
+    </property>
+    <widget class="QLabel" name="labelCustomerId">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>75</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>CustomerId:</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="spinBoxCustomerId">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>20</y>
+       <width>71</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>59</number>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonSearch">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>20</y>
+       <width>140</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Xem cụm &amp;&amp; Gợi ý</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelSearchResult">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>741</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 0, 0)</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QTableWidget" name="tableWidgetRecommend">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
+       <width>741</width>
+       <height>271</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBoxPredict">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>570</y>
+      <width>331</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>5. Dự đoán cụm cho Customer mới</string>
+    </property>
+    <widget class="QLabel" name="labelGenreCount">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>25</y>
+       <width>71</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>GenreCount:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditGenreCount">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>25</y>
+       <width>221</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>5</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelAvgMinutes">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>55</y>
+       <width>71</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>AvgMinutes:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditAvgMinutes">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>55</y>
+       <width>221</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>4.5</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonPredict">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>90</y>
+       <width>301</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Predict Cluster</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelPredictResult">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>125</y>
+       <width>71</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Kết quả:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditPredictResult">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>150</y>
+       <width>301</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(209, 255, 201)</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBoxSummary">
+    <property name="geometry">
+     <rect>
+      <x>1110</x>
+      <y>570</y>
+      <width>381</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>6. Thống kê theo cụm</string>
+    </property>
+    <widget class="QTableWidget" name="tableWidgetSummary">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>361</width>
+       <height>331</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="labelDesignedBy">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>940</y>
+      <width>1481</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Designed by: KhaDo - Faculty of Information Systems, UEL</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1516</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="defaultUp">
+    <bool>false</bool>
+   </property>
+   <property name="nativeMenuBar">
+    <bool>false</bool>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuModel">
+    <property name="title">
+     <string>Model</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuModel"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
